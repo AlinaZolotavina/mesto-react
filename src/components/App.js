@@ -3,12 +3,18 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 function App() {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPhotoPopupOpen, setAddPhotoPopupOpen] = useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({})
+  const [isImagePopupOpen, setImagePopupOpen] = useState(false);
 
   function handleEditProfilePopupOpen() {
     setEditProfilePopupOpen(!isEditProfilePopupOpen);
@@ -26,23 +32,34 @@ function App() {
     setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   }
 
+  function handleCardClick(card) {
+    setImagePopupOpen(!isImagePopupOpen);
+    setSelectedCard(card)
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setAddPhotoPopupOpen(false);
     setConfirmationPopupOpen(false);
     setEditAvatarPopupOpen(false);
+    setImagePopupOpen(false);
+    setSelectedCard({});
   }
 
   return (
     <div className="page__container">
-      <Header className="header" />
+      <Header />
       <Main 
         className="content"
         onEditProfile={handleEditProfilePopupOpen}
         onAddPlace={handleAddPhotoFormPopupOpen}
         onEditAvatar={handleEditAvatarPopupOpen}
+        onCardClick={handleCardClick}
+        onDeleteBtnClick={handleConfirmationPopupOpen}
       />          
-      <Footer className="footer" />
+      <Footer 
+        year={currentYear}
+      />
 
       <PopupWithForm
         name="edit-profile"
@@ -103,7 +120,12 @@ function App() {
           <span className="form__input-error avatar-link-input-error">Ссылка на зображение.</span>
         </label>
       </PopupWithForm>
-              
+
+      <ImagePopup 
+        card={selectedCard}
+        isOpen={isImagePopupOpen}
+        onClose={closeAllPopups}
+      />               
     </div>
   )
 }

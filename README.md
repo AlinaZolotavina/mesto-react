@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Project: Mesto ![english](./src/images/english.png?raw=true?raw=true)
+## About the project:
+The interactive service that allows users to add photos and captions to them, delete added photos, put likes, edit profile information, change the user's avatar.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+*At the moment the following options are available:*
+- receiving user data and initial cards from server,
+- opening popups,
+- closing popups by click.
 
-In the project directory, you can run:
 
-### `npm start`
+## Technologies in use:
+- HTML5: semantic markup;
+- CSS3: Flexible Box Layout, Grid Layout, Backgrounds and Borders,  Colors, Fonts, Media queries;
+- Java Script: OOP, HTTP request methods, Promise.
+- React JS: function components, hooks (useState, useEffect).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Future scope:
+- Implement the possibility to change user information;
+- Implement the possibility to change the user's avatar;
+- Implement the possibility of adding photos and captions to them;
+- Implement the possibility of deleting added photos;
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Проект: Место ![russian](./src/images/russian.png?raw=true?raw=true)
+## О проекте:
+Интерактивный сервис, позволяющий пользователям добавлять фотографии и подписи к ним, удалять добавленные фотографии, ставить лайки, редактировать информацию профиля, изменять аватар пользователя.
 
-### `npm test`
+*На данный момент доступны следующие возможности:*
+- получение данных пользователя и исходных карточек с сервера,
+- открытие попапов,
+- закрытие попапов по клику.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Использованные технологии:
+- HTML: семантическая верстка;
+- CSS: технология построения сетки Flex, технология построения сетки Grid Layout, фоны и границы, цвета, шрифты, медиазапросы;
+- Java Script: ООП, HTTP-запросы, промисы;
+- React JS: функциональные компоненты, хуки (useState, useEffect).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Планы по доработке проекта:
+- Реализовать возможность изменения информации о пользователе;
+- Реализовать возможность изменения аватара пользователя;
+- Реализовать возможность добавления фотографий и подписей к ним;
+- Реализовать возможность удаления добавленных фотографий;
