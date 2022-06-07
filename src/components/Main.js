@@ -1,22 +1,17 @@
 import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import api from '../utils/api';
 import Card from './Card';
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, onDeleteBtnClick }) {
+  const currentUser = React.useContext(CurrentUserContext);
 
-  const [userAvatar, setUserAvatar] = React.useState('');
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.getInitialData()
+    api.getInitialCards()
     .then(data => {
-      const [userData, cardsData] = data;
-      setUserAvatar(userData.avatar);
-      setUserName(userData.name);
-      setUserDescription(userData.about);
-      setCards(cardsData);
+      setCards(data);
     })
     .catch((err) => console.log(err));
   }, []);
@@ -25,16 +20,16 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, onDeleteBt
     <main className="content">
       <section className="profile">
         <div className="profile__avatar">
-          <div className="profile__avatar-image" style={{ backgroundImage: `url(${userAvatar})` }} />
+          <div className="profile__avatar-image" style={{ backgroundImage: `url(${currentUser.avatar})` }} />
           <div className="profile__darkening"></div>
           <div className="profile__avatar-edit-btn" onClick={onEditAvatar}></div>
         </div>
         <div className="profile__info">
           <div className="profile__info-user">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button className="profile__edit-btn" onClick={onEditProfile}></button>
           </div>
-          <p className="profile__job">{userDescription}</p>
+          <p className="profile__job">{currentUser.about}</p>
         </div>
         <button className="profile__add-btn" onClick={onAddPlace}></button>
       </section>
