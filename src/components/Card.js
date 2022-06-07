@@ -1,6 +1,13 @@
 import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Card({ card, onCardClick, onDeleteBtnClick }) {
+    const currentUser = React.useContext(CurrentUserContext);
+    const isOwn = card.owner._id === currentUser._id;
+    const cardDeleteButtonClassName = (
+        `element__delete-btn ${isOwn ? 'element__delete-btn_active' : ''}`
+    ); 
+
     function handleCardClick() {
         onCardClick(card);
       }  
@@ -15,7 +22,7 @@ function Card({ card, onCardClick, onDeleteBtnClick }) {
                     <span className="element__like-counter">{card.likes.length}</span>
                 </div>
             </div>
-            <button className="element__delete-btn" onClick={onDeleteBtnClick}></button>
+            <button className={cardDeleteButtonClassName} onClick={onDeleteBtnClick}></button>
         </li>
     )
 }
