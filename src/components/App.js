@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 
@@ -14,6 +15,16 @@ function App() {
     api.getUserData()
     .then(data => {
       setCurrentUser(data);
+    })
+    .catch((err) => console.log(err));
+  }, []);
+
+  const [cards, setCards] = React.useState([]);
+
+  React.useEffect(() => {
+    api.getInitialCards()
+    .then(data => {
+      setCards(data);
     })
     .catch((err) => console.log(err));
   }, []);
@@ -49,6 +60,18 @@ function App() {
     setSelectedCard(card)
   }
 
+  function handleCardLike(id, isLiked) {
+    api.changeLikeCardStatus(id, isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => c._id === id ? newCard : c));
+    });
+  }
+
+  function handleCardDelete(id) {
+    api.deleteCard(id).then(() => {
+      setCards((state) => state.filter((c) => c._id !== id ? c : {}))
+    })
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setAddPhotoPopupOpen(false);
@@ -58,38 +81,38 @@ function App() {
     setSelectedCard({});
   }
 
+  function handleUpdateUser(data) {
+    api.changeUserData(data)
+    .then(data => {
+      setCurrentUser(data)       
+    })
+    .catch((err) => console.log(err));
+    closeAllPopups();
+    };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__container">
         <Header />
         <Main 
+          cards={cards}
           onEditProfile={handleEditProfilePopupOpen}
           onAddPlace={handleAddPhotoFormPopupOpen}
           onEditAvatar={handleEditAvatarPopupOpen}
           onCardClick={handleCardClick}
           onDeleteBtnClick={handleConfirmationPopupOpen}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />          
         <Footer 
           year={currentYear}
         />
 
-        <PopupWithForm
-          name="edit-profile"
-          title="Редактировать профиль"
-          formName="editProfileForm"
-          buttonText="Сохранить"
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-        >
-          <label className="form__item">
-            <input className="form__input form__input_type_name" id="name-input" type="text" name="name" placeholder="Ваше имя" minLength="2" maxLength="40" required />
-            <span className="form__input-error name-input-error">Вы пропустили это поле.</span>
-          </label>
-          <label className="form__item">
-            <input className="form__input form__input_type_job" id="job-input" type="text" name="about" placeholder="Кратко о Вас" minLength="2" maxLength="200" required />
-            <span className="form__input-error job-input-error">Вы пропустили это поле.</span>
-          </label>
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
         <PopupWithForm
           name="add-photo"
