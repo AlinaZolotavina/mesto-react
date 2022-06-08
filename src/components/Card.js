@@ -21,9 +21,9 @@ function Card({ card, onCardClick, onDeleteBtnClick, onCardLike }) {
         onCardLike(card._id, isLiked);
     }
 
-    // function handleCardDelete() {
-    //     onCardD
-    // }
+    function handleCardDelete() {
+        onDeleteBtnClick(card);
+    }
 
     return (
         <li className="element">
@@ -39,7 +39,7 @@ function Card({ card, onCardClick, onDeleteBtnClick, onCardLike }) {
                 isOwn && <button
                     type="button"
                     className={cardDeleteButtonClassName}
-                    onClick={onDeleteBtnClick}
+                    onClick={handleCardDelete}
                 ></button>
             }
         </li>

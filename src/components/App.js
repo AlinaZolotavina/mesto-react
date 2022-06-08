@@ -3,10 +3,10 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import Footer from '../components/Footer';
-import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import DeleteCardPopup from './DeleteCardPopup';
 import ImagePopup from './ImagePopup';
 import api from '../utils/api';
 
@@ -36,7 +36,7 @@ function App() {
 
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPhotoPopupOpen, setAddPhotoPopupOpen] = useState(false);
-  const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
+  const [isDeleteCardPopupOpen, setDeleteCardPopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({})
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
@@ -49,8 +49,9 @@ function App() {
     setAddPhotoPopupOpen(!isAddPhotoPopupOpen);
   }
 
-  function handleConfirmationPopupOpen() {
-    setConfirmationPopupOpen(!isConfirmationPopupOpen);
+  function handleDeleteCardPopupOpen(card) {
+    setDeleteCardPopupOpen(!isDeleteCardPopupOpen);
+    setSelectedCard(card);
   }
 
   function handleEditAvatarPopupOpen() {
@@ -59,25 +60,28 @@ function App() {
 
   function handleCardClick(card) {
     setImagePopupOpen(!isImagePopupOpen);
-    setSelectedCard(card)
+    setSelectedCard(card);
   }
 
   function handleCardLike(id, isLiked) {
     api.changeLikeCardStatus(id, isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === id ? newCard : c));
-    });
+    })
+    .catch((err) => console.log(err));
   }
 
-  function handleCardDelete(id) {
-    api.deleteCard(id).then(() => {
-      setCards((state) => state.filter((c) => c._id !== id ? c : {}))
+  function handleCardDelete(card) {
+    api.deleteCard(card._id).then(() => {
+      setCards((state) => state.filter((c) => c._id !== card._id && c))
     })
+    .catch((err) => console.log(err));
+    closeAllPopups();
   }
 
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setAddPhotoPopupOpen(false);
-    setConfirmationPopupOpen(false);
+    setDeleteCardPopupOpen(false);
     setEditAvatarPopupOpen(false);
     setImagePopupOpen(false);
     setSelectedCard({});
@@ -120,7 +124,7 @@ function App() {
           onAddPlace={handleAddPhotoPopupOpen}
           onEditAvatar={handleEditAvatarPopupOpen}
           onCardClick={handleCardClick}
-          onDeleteBtnClick={handleConfirmationPopupOpen}
+          onDeleteBtnClick={handleDeleteCardPopupOpen}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
         />          
@@ -140,15 +144,12 @@ function App() {
           onAddPlace={handleAddPlaceSubmit}
         />
 
-        <PopupWithForm
-          name="confirmation"
-          title="Вы уверены?"
-          formName="confirmForm"
-          buttonText="Да"
-          isOpen={isConfirmationPopupOpen}
+        <DeleteCardPopup
+          card={selectedCard}
+          isOpen={isDeleteCardPopupOpen}
           onClose={closeAllPopups}
-        >          
-        </PopupWithForm>
+          onDeleteCard={handleCardDelete}
+        />
 
         <EditAvatarPopup 
           isOpen={isEditAvatarPopupOpen}

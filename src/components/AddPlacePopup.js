@@ -17,7 +17,15 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
         onAddPlace({
             name: title,
             link: link
-        })
+        });
+        setTitle('');
+        setLink('');
+    }
+
+    function handleClose() {
+        onClose();
+        setTitle('');
+        setLink('');
     }
 
     return (
@@ -27,7 +35,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             formName="addNewPhotoForm"
             buttonText="Создать"
             isOpen={isOpen}
-            onClose={onClose}
+            onClose={handleClose}
             onSubmit={handleSubmit}
         >
             <label className="form__item">
