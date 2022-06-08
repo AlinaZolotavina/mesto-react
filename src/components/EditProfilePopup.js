@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import PopupWithForm from "./PopupWithForm";
 
-function EditProfilePopup ({ isOpen, onClose, onUpdateUser }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     const currentUser = React.useContext(CurrentUserContext);
     React.useEffect(() => {
         setName(currentUser.name);
@@ -47,7 +47,7 @@ function EditProfilePopup ({ isOpen, onClose, onUpdateUser }) {
                     minLength="2"
                     maxLength="40"
                     required
-                    value={name}
+                    value={name || ''}
                     onChange={handleNameChange}
                 />
                 <span className="form__input-error name-input-error">Вы пропустили это поле.</span>
@@ -62,7 +62,7 @@ function EditProfilePopup ({ isOpen, onClose, onUpdateUser }) {
                     minLength="2"
                     maxLength="200"
                     required
-                    value={description}
+                    value={description || ''}
                     onChange={handleDescriptionChange}
                 />
                 <span className="form__input-error job-input-error">Вы пропустили это поле.</span>
