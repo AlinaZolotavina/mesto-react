@@ -12,20 +12,23 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
         setLink(e.target.value);
     }
 
+    function clearInputs() {
+        setTitle('');
+        setLink('');
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
         onAddPlace({
             name: title,
             link: link
         });
-        setTitle('');
-        setLink('');
+        clearInputs();
     }
 
     function handleClose() {
         onClose();
-        setTitle('');
-        setLink('');
+        clearInputs();
     }
 
     return (
@@ -36,7 +39,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             buttonText="Создать"
             isOpen={isOpen}
             onClose={handleClose}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit}        
         >
             <label className="form__item">
                 <input
@@ -51,7 +54,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
                     value={title || ''}
                     onChange={handleTitleChange}
                 />
-                <span className="form__input-error title-input-error">Вы пропустили это поле.</span>
+            <span className="form__input-error title-input-error">Вы пропустили это поле.</span>                
             </label>
             <label className="form__item">
                 <input
@@ -64,7 +67,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
                     value={link || ''}
                     onChange={handleLinkChange}
                 />
-                <span className="form__input-error card-link-input-error">Введите адрес сайта.</span>
+                <span className="form__input-error card-link-input-error">Вы пропустили это поле.</span>                
             </label>
         </PopupWithForm>
     )

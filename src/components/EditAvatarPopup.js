@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onValidation }) {
     const [avatar, setAvatar] = useState('');
     function handleAvatarChange(e) {
         setAvatar(e.target.value);
@@ -9,13 +9,22 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
     const inputRef = useRef(null);
 
+    function clearInput() {
+        setAvatar('');
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
         onUpdateAvatar({
             avatar: inputRef.current.value
-        })
+        });
+        clearInput();
     }
 
+    function handleClose() {
+        onClose();
+        clearInput();
+    }
 
     return (
         <PopupWithForm
@@ -24,7 +33,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
             formName="updateAvatar"
             buttonText="Сохранить"
             isOpen={isOpen}
-            onClose={onClose}
+            onClose={handleClose}
             onSubmit={handleSubmit}
         >
             <label className="form__item">
@@ -39,7 +48,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
                     onChange={handleAvatarChange}
                     ref={inputRef}
                 />
-                <span className="form__input-error avatar-link-input-error">Ссылка на изображение.</span>
+                <span className="form__input-error avatar-link-input-error">Вы пропустили это поле.</span>
             </label>
         </PopupWithForm>
     )
