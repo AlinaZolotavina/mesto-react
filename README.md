@@ -6,9 +6,16 @@ The interactive service that allows users to add photos and captions to them, de
 *At the moment the following options are available:*
 - receiving user data and initial cards from server,
 - opening popups,
-- closing popups by click.
+- closing popups by click,
+- editing profile information,
+- adding new photo and its caption,
+- activating the "like" button,
+- deleting photos ,
+- changing user's avatar,
+- "like" counter.
 
 
+[Project link on GitHub Pages](https://alinazolotavina.github.io/mesto-react/)
 ## Technologies in use:
 - HTML5: semantic markup;
 - CSS3: Flexible Box Layout, Grid Layout, Backgrounds and Borders,  Colors, Fonts, Media queries;
@@ -16,10 +23,7 @@ The interactive service that allows users to add photos and captions to them, de
 - React JS: function components, hooks (useState, useEffect).
 
 ## Future scope:
-- Implement the possibility to change user information;
-- Implement the possibility to change the user's avatar;
-- Implement the possibility of adding photos and captions to them;
-- Implement the possibility of deleting added photos;
+- Client-side form validation
 
 # Проект: Место ![russian](./src/images/russian.png?raw=true?raw=true)
 ## О проекте:
@@ -28,9 +32,15 @@ The interactive service that allows users to add photos and captions to them, de
 *На данный момент доступны следующие возможности:*
 - получение данных пользователя и исходных карточек с сервера,
 - открытие попапов,
-- закрытие попапов по клику.
+- закрытие попапов по клику,
+- редактирование информации профиля,
+- добавление новой фотографии с подписью к ней,
+- активация кнопки "лайка",
+- удаление фотографий,
+- изменение аватара пользователя,
+- счетчик "лайков".
 
-
+[Ссылка на проект на GitHub Pages](https://alinazolotavina.github.io/mesto-react/)
 ## Использованные технологии:
 - HTML: семантическая верстка;
 - CSS: технология построения сетки Flex, технология построения сетки Grid Layout, фоны и границы, цвета, шрифты, медиазапросы;
@@ -38,7 +48,4 @@ The interactive service that allows users to add photos and captions to them, de
 - React JS: функциональные компоненты, хуки (useState, useEffect).
 
 ## Планы по доработке проекта:
-- Реализовать возможность изменения информации о пользователе;
-- Реализовать возможность изменения аватара пользователя;
-- Реализовать возможность добавления фотографий и подписей к ним;
-- Реализовать возможность удаления добавленных фотографий;
+- Валидация форм на стороне пользователя.
