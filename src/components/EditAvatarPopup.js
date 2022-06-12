@@ -3,9 +3,6 @@ import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     const inputRef = useRef(null);
-    function handleAvatarChange(e) {
-        inputRef.current.value = e.target.value;
-    };
 
     function clearInput() {
         inputRef.current.value = '';
@@ -42,7 +39,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
                     name="avatar"
                     placeholder="Ссылка на картинку" 
                     required
-                    onChange={handleAvatarChange}
+                    defaultValue=''
                     ref={inputRef}
                 />
                 <span className="form__input-error avatar-link-input-error">Вы пропустили это поле.</span>
