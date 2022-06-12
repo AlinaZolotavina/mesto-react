@@ -7,6 +7,6 @@ function Header() {
       <img className="header__logo" alt="логотип" src={logoPath}/>
     </header>
   )
-}
+};
 
 export default Header;

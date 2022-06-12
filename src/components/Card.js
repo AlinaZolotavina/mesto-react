@@ -15,15 +15,15 @@ function Card({ card, onCardClick, onDeleteBtnClick, onCardLike }) {
 
     function handleCardClick() {
         onCardClick(card);
-      }
+    };
     
     function handleCardLike() {
         onCardLike(card._id, isLiked);
-    }
+    };
 
     function handleCardDelete() {
         onDeleteBtnClick(card);
-    }
+    };
 
     return (
         <li className="element">
@@ -44,6 +44,6 @@ function Card({ card, onCardClick, onDeleteBtnClick, onCardLike }) {
             }
         </li>
     )
-}
+};
 
 export default Card;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from '../components/Header';
 import Main from '../components/Main';
@@ -12,63 +12,56 @@ import api from '../utils/api';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-
-  React.useEffect(() => {
-    api.getUserData()
-    .then(data => {
-      setCurrentUser(data);
-    })
-    .catch((err) => console.log(err));
-  }, []);
-
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
-    api.getInitialCards()
-    .then(data => {
-      setCards(data);
-    })
-    .catch((err) => console.log(err));
-  }, []);
-
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
+  const [cards, setCards] = useState([]);
 
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPhotoPopupOpen, setAddPhotoPopupOpen] = useState(false);
   const [isDeleteCardPopupOpen, setDeleteCardPopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState({})
+  const [selectedCard, setSelectedCard] = useState({});
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  
+  useEffect(() => {
+    api.getInitialData()
+    .then(data => {
+      const [userData, cardsData] = data;
+      setCurrentUser(userData);
+      setCards(cardsData);
+    })
+    .catch((err) => console.log(err));
+  },  []);
 
   function handleEditProfilePopupOpen() {
     setEditProfilePopupOpen(!isEditProfilePopupOpen);
-  }
+  };
 
   function handleAddPhotoPopupOpen() {
     setAddPhotoPopupOpen(!isAddPhotoPopupOpen);
-  }
+  };
 
   function handleDeleteCardPopupOpen(card) {
     setDeleteCardPopupOpen(!isDeleteCardPopupOpen);
     setSelectedCard(card);
-  }
+  };
 
   function handleEditAvatarPopupOpen() {
     setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-  }
+  };
 
   function handleCardClick(card) {
     setImagePopupOpen(!isImagePopupOpen);
     setSelectedCard(card);
-  }
+  };
 
   function handleCardLike(id, isLiked) {
     api.changeLikeCardStatus(id, isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === id ? newCard : c));
     })
     .catch((err) => console.log(err));
-  }
+  };
 
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
@@ -76,7 +69,7 @@ function App() {
     })
     .catch((err) => console.log(err));
     closeAllPopups();
-  }
+  };
 
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
@@ -85,7 +78,7 @@ function App() {
     setEditAvatarPopupOpen(false);
     setImagePopupOpen(false);
     setSelectedCard({});
-  }
+  };
 
   function handleUpdateUser(data) {
     api.changeUserData(data)
@@ -103,7 +96,7 @@ function App() {
     })
     .catch((err) => console.log(err));
     closeAllPopups();
-  }
+  };
 
   function handleAddPlaceSubmit(newCard) {
     api.addCard(newCard)
@@ -112,7 +105,7 @@ function App() {
     })
     .catch((err) => console.log(err));
     closeAllPopups();
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -165,6 +158,6 @@ function App() {
       </div>
     </CurrentUserContext.Provider>
   )
-}
+};
 
 export default App;

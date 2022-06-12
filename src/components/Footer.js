@@ -6,6 +6,6 @@ function Footer({ year }) {
       <p className="footer__copyright">&copy; {year} Mesto Russia</p>
     </footer>
   )
-}
+};
 
 export default Footer;

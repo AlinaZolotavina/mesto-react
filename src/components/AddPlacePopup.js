@@ -5,17 +5,17 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     const [title, setTitle] = useState('');
     function handleTitleChange(e) {
         setTitle(e.target.value);
-    }
+    };
 
     const [link, setLink] = useState('');
     function handleLinkChange(e) {
         setLink(e.target.value);
-    }
+    };
 
     function clearInputs() {
         setTitle('');
         setLink('');
-    }
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -24,12 +24,12 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             link: link
         });
         clearInputs();
-    }
+    };
 
     function handleClose() {
         onClose();
         clearInputs();
-    }
+    };
 
     return (
         <PopupWithForm
@@ -71,6 +71,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
             </label>
         </PopupWithForm>
     )
-}
+};
 
 export default AddPlacePopup;

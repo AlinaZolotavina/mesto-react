@@ -1,17 +1,15 @@
-import React, { useState, useRef } from 'react';
+import { useRef } from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onValidation }) {
-    const [avatar, setAvatar] = useState('');
-    function handleAvatarChange(e) {
-        setAvatar(e.target.value);
-    }
-
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     const inputRef = useRef(null);
+    function handleAvatarChange(e) {
+        inputRef.current.value = e.target.value;
+    };
 
     function clearInput() {
-        setAvatar('');
-    }
+        inputRef.current.value = '';
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -19,12 +17,12 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onValidation }) {
             avatar: inputRef.current.value
         });
         clearInput();
-    }
+    };
 
     function handleClose() {
         onClose();
         clearInput();
-    }
+    };
 
     return (
         <PopupWithForm
@@ -44,7 +42,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onValidation }) {
                     name="avatar"
                     placeholder="Ссылка на картинку" 
                     required
-                    value={avatar || ''}
                     onChange={handleAvatarChange}
                     ref={inputRef}
                 />
@@ -52,6 +49,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onValidation }) {
             </label>
         </PopupWithForm>
     )
-}
+};
 
 export default EditAvatarPopup;

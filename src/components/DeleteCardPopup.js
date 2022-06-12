@@ -1,16 +1,16 @@
-import React from 'react';
+import { useContext } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import PopupWithForm from "./PopupWithForm";
 
 function DeleteCardPopup({ card, isOpen, onClose, onDeleteCard }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
     if(card.owner._id === currentUser._id) {
         onDeleteCard(card);
     } 
-  }
+  };
 
   return (
     <PopupWithForm
@@ -23,6 +23,6 @@ function DeleteCardPopup({ card, isOpen, onClose, onDeleteCard }) {
       onSubmit={handleSubmit}
     />          
   )
-}
+};
 
 export default DeleteCardPopup;

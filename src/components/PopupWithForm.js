@@ -13,6 +13,6 @@ function PopupWithForm({ name, title, formName, children, buttonText, isOpen, on
       </div>
     </div>
   )
-}
+};
 
 export default PopupWithForm;
